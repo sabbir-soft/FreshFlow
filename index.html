@@ -3,1278 +3,896 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ফ্রেশ ফ্লো - প্যাকেজড ড্রিংকিং ওয়াটার</title>
+<title>ফ্রেশ ফ্লো — বিশুদ্ধ পানীয় জল | Royal Choice Food & Beverage</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --primary: #00A551;
-    --primary-dark: #0C6C38;
-    --primary-light: #8BC442;
-    --accent: #21275D;
-    --water-blue: #36AFE0;
-    --water-blue-dark: #1a7aab;
-    --white: #ffffff;
-    --glass-bg: rgba(255,255,255,0.12);
-    --glass-border: rgba(255,255,255,0.25);
-    --glass-shadow: rgba(0,0,0,0.15);
-  }
+:root {
+  --navy:        #090F1E;
+  --navy-mid:    #0E1A30;
+  --navy-card:   #111E35;
+  --navy-light:  #162646;
+  --green:       #00A551;
+  --green-dark:  #007A3D;
+  --green-light: #8BC442;
+  --green-glow:  rgba(0,165,81,0.14);
+  --blue:        #36AFE0;
+  --blue-light:  #7DCFEF;
+  --blue-glow:   rgba(54,175,224,0.1);
+  --white:       #FFFFFF;
+  --muted:       rgba(255,255,255,0.5);
+  --card-bg:     rgba(255,255,255,0.038);
+  --card-border: rgba(255,255,255,0.075);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Hind Siliguri',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;line-height:1.6;}
 
-  * { margin:0; padding:0; box-sizing:border-box; }
+/* ══ BACKGROUND ══ */
+.bg-wrap{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.28;}
+.orb-1{width:800px;height:800px;background:radial-gradient(circle,#0b3d6e,transparent 70%);top:-250px;left:-200px;animation:o1 20s ease-in-out infinite alternate;}
+.orb-2{width:600px;height:600px;background:radial-gradient(circle,#013d20,transparent 70%);top:35%;right:-180px;animation:o2 25s ease-in-out infinite alternate;}
+.orb-3{width:500px;height:500px;background:radial-gradient(circle,#083a5c,transparent 70%);bottom:5%;left:15%;animation:o1 30s ease-in-out infinite alternate-reverse;}
+@keyframes o1{to{transform:translate(60px,40px) scale(1.08);}}
+@keyframes o2{to{transform:translate(-50px,70px) scale(.94);}}
 
-  html { scroll-behavior: smooth; }
+/* ══ TOP BAR ══ */
+.topbar{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--blue),var(--green-light),var(--blue));background-size:400% 100%;animation:barShift 6s ease infinite;z-index:1001;}
+@keyframes barShift{0%,100%{background-position:0%;}50%{background-position:100%;}}
 
-  body {
-    font-family: 'Hind Siliguri', sans-serif;
-    background: linear-gradient(135deg, #0a2d1a 0%, #0C6C38 30%, #00A551 60%, #36AFE0 100%);
-    min-height: 100vh;
-    overflow-x: hidden;
-    color: #fff;
-  }
+/* ══ NAVBAR ══ */
+nav{position:fixed;top:3px;left:0;right:0;height:70px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 52px;background:rgba(9,15,30,.7);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--card-border);transition:background .3s;}
+.nav-left{display:flex;align-items:center;gap:13px;}
+.nav-logo{height:42px;width:auto;filter:drop-shadow(0 0 8px rgba(54,175,224,.3));}
+.nav-brand{display:flex;flex-direction:column;line-height:1.2;}
+.nb-main{font-family:'Tiro Bangla',serif;font-size:1.05rem;font-weight:700;}
+.nb-sub{font-size:.64rem;color:var(--blue-light);letter-spacing:.1em;text-transform:uppercase;opacity:.75;}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .25s;position:relative;}
+.nav-links a:hover{color:#fff;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--green);transition:width .25s;}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{padding:9px 20px;background:var(--green);color:#fff!important;border-radius:7px;font-weight:600!important;font-size:.86rem!important;box-shadow:0 0 20px rgba(0,165,81,.3);transition:all .25s!important;}
+.nav-cta:hover{background:var(--green-dark)!important;transform:translateY(-1px)!important;box-shadow:0 0 30px rgba(0,165,81,.5)!important;}
+.nav-cta::after{display:none!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;}
 
-  /* Animated background bubbles */
-  .bg-bubbles {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .bubble {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-    animation: floatUp linear infinite;
-  }
-  .bubble:nth-child(1)  { width:60px;  height:60px;  left:5%;   animation-duration:12s; animation-delay:0s; }
-  .bubble:nth-child(2)  { width:30px;  height:30px;  left:15%;  animation-duration:9s;  animation-delay:2s; }
-  .bubble:nth-child(3)  { width:90px;  height:90px;  left:25%;  animation-duration:15s; animation-delay:1s; }
-  .bubble:nth-child(4)  { width:40px;  height:40px;  left:40%;  animation-duration:11s; animation-delay:3s; }
-  .bubble:nth-child(5)  { width:70px;  height:70px;  left:55%;  animation-duration:13s; animation-delay:0.5s; }
-  .bubble:nth-child(6)  { width:25px;  height:25px;  left:65%;  animation-duration:8s;  animation-delay:4s; }
-  .bubble:nth-child(7)  { width:80px;  height:80px;  left:75%;  animation-duration:16s; animation-delay:1.5s; }
-  .bubble:nth-child(8)  { width:45px;  height:45px;  left:85%;  animation-duration:10s; animation-delay:2.5s; }
-  .bubble:nth-child(9)  { width:55px;  height:55px;  left:92%;  animation-duration:14s; animation-delay:0.8s; }
-  .bubble:nth-child(10) { width:35px;  height:35px;  left:48%;  animation-duration:11s; animation-delay:3.5s; }
+/* ══ HERO ══ */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;padding:100px 52px 80px;max-width:1400px;margin:0 auto;gap:60px;}
+.hero-left{flex:1;max-width:660px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border:1px solid rgba(54,175,224,.3);border-radius:5px;font-size:.72rem;color:var(--blue-light);letter-spacing:.12em;text-transform:uppercase;margin-bottom:28px;animation:up .7s ease .1s both;}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+.company-line{font-size:.8rem;color:rgba(255,255,255,.3);margin-bottom:18px;letter-spacing:.03em;animation:up .7s ease .2s both;}
+.company-line span{color:var(--green-light);}
+.hero-title{font-family:'Tiro Bangla',serif;font-size:clamp(2.5rem,5.2vw,4rem);font-weight:700;line-height:1.2;margin-bottom:22px;animation:up .7s ease .3s both;}
+.hl-g{color:var(--green-light);}
+.hl-b{color:var(--blue-light);}
+.hero-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:500px;margin-bottom:38px;animation:up .7s ease .45s both;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:up .7s ease .55s both;}
+.btn-p{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;background:var(--green);color:#fff;border:none;border-radius:8px;font-size:.95rem;font-family:'Hind Siliguri',sans-serif;font-weight:600;cursor:pointer;text-decoration:none;box-shadow:0 4px 22px rgba(0,165,81,.35);transition:all .25s;}
+.btn-p:hover{background:var(--green-dark);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,165,81,.5);}
+.btn-o{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;background:transparent;color:#fff;border:1px solid var(--card-border);border-radius:8px;font-size:.95rem;font-family:'Hind Siliguri',sans-serif;font-weight:500;cursor:pointer;text-decoration:none;transition:all .25s;}
+.btn-o:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.04);}
+.hero-stats{display:flex;gap:44px;margin-top:56px;flex-wrap:wrap;animation:up .7s ease .7s both;}
+.stat-n{font-size:1.9rem;font-weight:700;display:block;line-height:1;}
+.stat-n sup{font-size:.9rem;color:var(--green-light);vertical-align:super;}
+.stat-l{font-size:.75rem;color:var(--muted);margin-top:5px;display:block;}
+/* Hero right visual */
+.hero-right{flex:0 0 380px;position:relative;animation:up .8s ease .3s both;}
+.v-ring-wrap{width:380px;height:380px;position:relative;}
+.v-ring{position:absolute;inset:0;border-radius:50%;border:1px solid;animation:rp 4s ease-in-out infinite;}
+.r1{border-color:rgba(54,175,224,.2);}
+.r2{inset:22px;border-color:rgba(54,175,224,.12);animation-delay:.8s;}
+.r3{inset:44px;border-color:rgba(0,165,81,.14);animation-delay:1.6s;}
+@keyframes rp{0%,100%{transform:scale(1);opacity:.7;}50%{transform:scale(1.03);opacity:1;}}
+.v-center{position:absolute;inset:64px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(54,175,224,.12),rgba(9,15,30,.95));border:1px solid rgba(54,175,224,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;backdrop-filter:blur(12px);}
+.v-logo{width:130px;height:auto;filter:drop-shadow(0 0 18px rgba(54,175,224,.4));}
+.v-cert{font-size:.68rem;color:var(--blue-light);letter-spacing:.08em;text-align:center;line-height:1.6;opacity:.8;}
+.fbadge{position:absolute;background:var(--navy-mid);border:1px solid var(--card-border);border-radius:9px;padding:9px 13px;display:flex;align-items:center;gap:8px;font-size:.76rem;font-weight:600;backdrop-filter:blur(12px);animation:fbf 5s ease-in-out infinite;}
+.fbadge-1{top:12px;right:-12px;}
+.fbadge-2{bottom:36px;left:-24px;animation-delay:1.6s;}
+.fbadge-3{top:48%;left:-30px;animation-delay:3.2s;}
+.bd{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.bd-g{background:var(--green);box-shadow:0 0 6px var(--green);}
+.bd-b{background:var(--blue);box-shadow:0 0 6px var(--blue);}
+@keyframes fbf{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes up{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
 
-  @keyframes floatUp {
-    0%   { bottom: -100px; opacity: 0; transform: translateX(0) scale(0.8); }
-    10%  { opacity: 1; }
-    90%  { opacity: 0.6; }
-    100% { bottom: 110%; opacity: 0; transform: translateX(30px) scale(1); }
-  }
+/* ══ TRUST STRIP ══ */
+.trust{position:relative;z-index:1;background:rgba(255,255,255,.022);border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border);padding:26px 52px;}
+.trust-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:center;align-items:center;gap:48px;flex-wrap:wrap;}
+.t-item{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--muted);}
+.t-icon{width:30px;height:30px;border-radius:7px;background:var(--green-glow);border:1px solid rgba(0,165,81,.18);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
 
-  /* Water wave at top */
-  .wave-top {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(90deg, var(--primary-light), var(--water-blue), var(--primary), var(--water-blue-dark));
-    background-size: 300% 100%;
-    animation: waveShift 4s ease infinite;
-    z-index: 1000;
-  }
-  @keyframes waveShift {
-    0%,100% { background-position: 0% 50%; }
-    50%      { background-position: 100% 50%; }
-  }
+/* ══ SECTIONS ══ */
+.sec{position:relative;z-index:1;padding:96px 52px;}
+.si{max-width:1200px;margin:0 auto;}
+.sec-alt{background:rgba(255,255,255,.016);}
+.sec-lbl{display:inline-block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-light);margin-bottom:12px;font-weight:700;}
+.sec-title{font-family:'Tiro Bangla',serif;font-size:clamp(1.65rem,3.3vw,2.5rem);font-weight:700;line-height:1.25;margin-bottom:14px;}
+.sec-desc{font-size:.95rem;color:var(--muted);line-height:1.8;max-width:520px;}
+.sec-hdr{margin-bottom:60px;}
+.sec-hdr.cx{text-align:center;}
+.sec-hdr.cx .sec-desc{margin:0 auto;}
 
-  /* NAVBAR */
-  nav {
-    position: fixed;
-    top: 6px; left: 0;
-    width: 100%;
-    z-index: 999;
-    padding: 14px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: rgba(0,0,0,0.25);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    transition: background 0.3s;
-  }
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .nav-logo-circle {
-    width: 46px; height: 46px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-    box-shadow: 0 4px 15px rgba(0,165,81,0.5);
-    animation: pulse 2.5s ease infinite;
-  }
-  @keyframes pulse {
-    0%,100% { box-shadow: 0 4px 15px rgba(0,165,81,0.5); }
-    50%      { box-shadow: 0 4px 30px rgba(0,165,81,0.9); }
-  }
-  .nav-brand {
-    font-family: 'Tiro Bangla', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #8BC442, #ffffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .nav-links {
-    display: flex;
-    gap: 28px;
-    list-style: none;
-  }
-  .nav-links a {
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: color 0.3s;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 2px;
-    background: var(--primary-light);
-    transition: width 0.3s;
-  }
-  .nav-links a:hover { color: var(--primary-light); }
-  .nav-links a:hover::after { width: 100%; }
-  .nav-cta {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: #fff !important;
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-weight: 600 !important;
-    box-shadow: 0 4px 15px rgba(0,165,81,0.4);
-    transition: transform 0.2s, box-shadow 0.2s !important;
-  }
-  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,165,81,0.6) !important; }
-  .nav-cta::after { display: none !important; }
+/* ══ CARD ══ */
+.card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;transition:all .3s;overflow:hidden;position:relative;}
+.card:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.13);transform:translateY(-4px);box-shadow:0 18px 55px rgba(0,0,0,.3);}
+.card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);pointer-events:none;}
 
-  /* HERO SECTION */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 120px 40px 80px;
-    z-index: 1;
-  }
-  .hero-content { max-width: 900px; margin: 0 auto; }
-  .hero-badge {
-    display: inline-block;
-    padding: 6px 20px;
-    background: rgba(54,175,224,0.2);
-    border: 1px solid rgba(54,175,224,0.4);
-    border-radius: 30px;
-    font-size: 0.85rem;
-    color: var(--water-blue);
-    margin-bottom: 24px;
-    animation: fadeInDown 0.8s ease 0.2s both;
-    letter-spacing: 1px;
-  }
-  .hero-title {
-    font-family: 'Tiro Bangla', serif;
-    font-size: clamp(2.8rem, 7vw, 5rem);
-    font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 20px;
-    animation: fadeInDown 0.8s ease 0.4s both;
-  }
-  .hero-title .green { color: var(--primary-light); }
-  .hero-title .blue  { color: var(--water-blue); }
-  .hero-subtitle {
-    font-size: 1.15rem;
-    color: rgba(255,255,255,0.8);
-    max-width: 600px;
-    margin: 0 auto 36px;
-    line-height: 1.7;
-    animation: fadeInDown 0.8s ease 0.6s both;
-  }
-  .hero-buttons {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    animation: fadeInDown 0.8s ease 0.8s both;
-  }
-  .btn-primary {
-    padding: 14px 36px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-family: 'Hind Siliguri', sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 8px 30px rgba(0,165,81,0.4);
-    transition: all 0.3s;
-  }
-  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,165,81,0.6); }
-  .btn-glass {
-    padding: 14px 36px;
-    background: var(--glass-bg);
-    color: #fff;
-    border: 1px solid var(--glass-border);
-    border-radius: 50px;
-    font-size: 1rem;
-    font-family: 'Hind Siliguri', sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s;
-  }
-  .btn-glass:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
+/* ══ FEATURES ══ */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:18px;}
+.feat-card{padding:34px 28px;}
+.feat-icon{width:54px;height:54px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:20px;}
+.fi-g{background:rgba(0,165,81,.1);border:1px solid rgba(0,165,81,.2);}
+.fi-b{background:rgba(54,175,224,.1);border:1px solid rgba(54,175,224,.2);}
+.fi-t{background:rgba(20,184,166,.1);border:1px solid rgba(20,184,166,.2);}
+.feat-title{font-family:'Tiro Bangla',serif;font-size:1.05rem;font-weight:700;margin-bottom:9px;}
+.feat-desc{font-size:.85rem;color:var(--muted);line-height:1.72;}
 
-  .hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 48px;
-    margin-top: 60px;
-    animation: fadeInUp 1s ease 1s both;
-    flex-wrap: wrap;
-  }
-  .stat-item { text-align: center; }
-  .stat-number {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--primary-light);
-    display: block;
-  }
-  .stat-label {
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.6);
-    margin-top: 4px;
-  }
+/* ══ PRODUCTS ══ */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;}
+.prod-head{padding:28px 26px 22px;background:linear-gradient(135deg,rgba(54,175,224,.055),transparent);border-bottom:1px solid var(--card-border);display:flex;align-items:center;gap:18px;}
+.prod-icon{width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(54,175,224,.14),rgba(0,165,81,.07));border:1px solid rgba(54,175,224,.18);display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;animation:bob 4s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+.prod-name{font-family:'Tiro Bangla',serif;font-size:1.2rem;font-weight:700;margin-bottom:3px;}
+.prod-vol{font-size:.75rem;color:var(--blue-light);font-weight:600;letter-spacing:.04em;}
+.prod-body{padding:22px 26px;}
+.prod-desc{font-size:.86rem;color:var(--muted);line-height:1.72;margin-bottom:18px;}
+.prod-tags{display:flex;gap:7px;flex-wrap:wrap;}
+.ptag{padding:4px 11px;border-radius:5px;font-size:.72rem;font-weight:600;letter-spacing:.02em;}
+.ptg{background:rgba(0,165,81,.1);color:var(--green-light);border:1px solid rgba(0,165,81,.2);}
+.ptb{background:rgba(54,175,224,.09);color:var(--blue-light);border:1px solid rgba(54,175,224,.2);}
 
-  /* Water bottle animation */
-  .hero-bottle {
-    position: absolute;
-    right: 8%;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 180px;
-    opacity: 0.08;
-    animation: bobFloat 4s ease-in-out infinite;
-    pointer-events: none;
-  }
-  @keyframes bobFloat {
-    0%,100% { transform: translateY(-50%) rotate(-5deg); }
-    50%      { transform: translateY(-55%) rotate(5deg); }
-  }
+/* ══ PROCESS ══ */
+.proc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;}
+@media(max-width:900px){.proc-grid{grid-template-columns:1fr 1fr;gap:32px;}}
+@media(max-width:500px){.proc-grid{grid-template-columns:1fr;}}
+.proc-grid::before{content:'';position:absolute;top:39px;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,165,81,.3),rgba(54,175,224,.3),rgba(0,165,81,.3),transparent);}
+@media(max-width:900px){.proc-grid::before{display:none;}}
+.proc-step{padding:0 16px;text-align:center;}
+.step-circ{width:78px;height:78px;border-radius:50%;background:var(--navy-mid);border:1px solid var(--card-border);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 22px;position:relative;z-index:1;transition:all .3s;}
+.proc-step:hover .step-circ{border-color:var(--green);box-shadow:0 0 20px rgba(0,165,81,.2);}
+.step-lbl{font-size:.55rem;color:var(--green-light);letter-spacing:.1em;text-transform:uppercase;font-weight:700;}
+.step-ico{font-size:1.3rem;}
+.step-t{font-family:'Tiro Bangla',serif;font-size:.98rem;font-weight:700;margin-bottom:7px;}
+.step-d{font-size:.8rem;color:var(--muted);line-height:1.6;}
 
-  /* SECTIONS */
-  section { position: relative; z-index: 1; padding: 80px 40px; }
+/* ══ DELIVERY (new section) ══ */
+.del-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;}
+.del-card{padding:0;}
+.del-head{padding:18px 22px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--card-border);}
+.del-num-badge{padding:5px 12px;background:var(--green-glow);border:1px solid rgba(0,165,81,.2);border-radius:6px;font-size:.8rem;font-weight:700;color:var(--green-light);font-family:monospace;white-space:nowrap;flex-shrink:0;}
+.del-agent{display:flex;flex-direction:column;min-width:0;}
+.del-agent-name{font-size:.95rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.del-agent-role{font-size:.72rem;color:var(--muted);letter-spacing:.04em;}
+.del-body{padding:16px 22px;}
+.del-areas{display:flex;gap:7px;flex-wrap:wrap;}
+.area-tag{padding:4px 10px;background:rgba(54,175,224,.07);border:1px solid rgba(54,175,224,.15);border-radius:5px;font-size:.75rem;color:var(--blue-light);}
+/* Special card for office / hotel lines */
+.del-head.office{background:linear-gradient(135deg,rgba(0,165,81,.08),transparent);}
+.del-head.hotel{background:linear-gradient(135deg,rgba(54,175,224,.08),transparent);}
 
-  .section-header {
-    text-align: center;
-    margin-bottom: 56px;
-  }
-  .section-tag {
-    display: inline-block;
-    padding: 4px 16px;
-    background: rgba(54,175,224,0.15);
-    border: 1px solid rgba(54,175,224,0.3);
-    border-radius: 20px;
-    font-size: 0.8rem;
-    color: var(--water-blue);
-    margin-bottom: 14px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .section-title {
-    font-family: 'Tiro Bangla', serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 700;
-    margin-bottom: 14px;
-  }
-  .section-desc {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.7);
-    max-width: 560px;
-    margin: 0 auto;
-    line-height: 1.7;
-  }
-  .gradient-text {
-    background: linear-gradient(135deg, var(--primary-light), var(--water-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+/* ══ LOCATION ══ */
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:start;}
+@media(max-width:768px){.loc-grid{grid-template-columns:1fr;}}
+.info-card{padding:34px;}
+.info-row{display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-bottom:1px solid var(--card-border);}
+.info-row:last-child{border-bottom:none;padding-bottom:0;}
+.ibox{width:38px;height:38px;border-radius:9px;background:var(--green-glow);border:1px solid rgba(0,165,81,.15);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.ilbl{font-size:.72rem;color:var(--muted);margin-bottom:3px;letter-spacing:.04em;}
+.ival{font-size:.92rem;font-weight:600;color:#fff;line-height:1.5;}
+.ival a{color:var(--green-light);text-decoration:none;}
+.ival a:hover{text-decoration:underline;}
+.map-card{border-radius:16px;overflow:hidden;height:380px;background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));border:1px solid var(--card-border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;}
+.map-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(54,175,224,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(54,175,224,.04) 1px,transparent 1px);background-size:38px 38px;}
+.map-pin{position:relative;z-index:1;text-align:center;}
+.map-pin-ico{font-size:2.4rem;display:block;animation:pb 2.2s ease-in-out infinite;}
+.map-pulse{width:44px;height:9px;border-radius:50%;background:rgba(0,165,81,.18);margin:0 auto;animation:ps 2.2s ease-in-out infinite;}
+@keyframes pb{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes ps{0%,100%{opacity:.3;transform:scaleX(.7);}50%{opacity:.8;transform:scaleX(1);}}
+.map-info{position:relative;z-index:1;text-align:center;}
+.map-info h3{font-size:1.05rem;font-weight:700;margin-bottom:5px;}
+.map-info p{font-size:.82rem;color:var(--muted);margin-bottom:14px;}
 
-  /* GLASS CARD */
-  .glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    box-shadow: 0 8px 40px var(--glass-shadow);
-    transition: transform 0.3s, box-shadow 0.3s;
-    overflow: hidden;
-    position: relative;
-  }
-  .glass-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  }
-  .glass-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 60px rgba(0,165,81,0.2);
-  }
+/* ══ ORDER ══ */
+.order-wrap{max-width:720px;margin:0 auto;}
+.order-card{padding:44px;}
+.fg{display:flex;flex-direction:column;gap:18px;}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media(max-width:600px){.fr2{grid-template-columns:1fr;}}
+.fgrp{display:flex;flex-direction:column;gap:7px;}
+.flbl{font-size:.76rem;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.05em;text-transform:uppercase;}
+.finp,.fsel,.ftxt{padding:12px 15px;background:rgba(255,255,255,.046);border:1px solid var(--card-border);border-radius:9px;color:#fff;font-size:.9rem;font-family:'Hind Siliguri',sans-serif;outline:none;transition:border .25s,background .25s;}
+.finp::placeholder,.ftxt::placeholder{color:rgba(255,255,255,.22);}
+.finp:focus,.fsel:focus,.ftxt:focus{border-color:rgba(0,165,81,.5);background:rgba(255,255,255,.065);box-shadow:0 0 0 3px rgba(0,165,81,.08);}
+.fsel option{background:#0e1a30;color:#fff;}
+.ftxt{resize:vertical;min-height:108px;}
+.fsubmit{width:100%;padding:15px;background:var(--green);color:#fff;border:none;border-radius:9px;font-size:.97rem;font-family:'Hind Siliguri',sans-serif;font-weight:700;cursor:pointer;transition:all .25s;letter-spacing:.02em;box-shadow:0 4px 20px rgba(0,165,81,.3);}
+.fsubmit:hover{background:var(--green-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,165,81,.45);}
 
-  /* FEATURES GRID */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .feature-card {
-    padding: 36px 28px;
-    text-align: center;
-  }
-  .feature-icon {
-    width: 72px; height: 72px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(0,165,81,0.3), rgba(54,175,224,0.3));
-    border: 1px solid rgba(255,255,255,0.2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 32px;
-    margin: 0 auto 20px;
-    box-shadow: 0 4px 20px rgba(0,165,81,0.2);
-  }
-  .feature-title {
-    font-family: 'Tiro Bangla', serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #fff;
-  }
-  .feature-desc {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.65;
-  }
+/* ══ CTA ══ */
+.cta-sec{position:relative;z-index:1;padding:72px 52px;}
+.cta-box{max-width:880px;margin:0 auto;text-align:center;padding:60px 44px;background:linear-gradient(135deg,rgba(0,165,81,.09),rgba(54,175,224,.07));border:1px solid rgba(255,255,255,.075);border-radius:18px;position:relative;overflow:hidden;}
+.cta-bg{position:absolute;font-family:'Tiro Bangla',serif;font-size:10rem;font-weight:700;color:rgba(255,255,255,.016);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none;}
+.cta-title{font-family:'Tiro Bangla',serif;font-size:clamp(1.5rem,3.3vw,2.3rem);font-weight:700;margin-bottom:12px;position:relative;z-index:1;}
+.cta-desc{color:var(--muted);font-size:.95rem;line-height:1.75;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;position:relative;z-index:1;}
+.cta-phones{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;margin-bottom:14px;}
+.ph-btn{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border:1px solid rgba(0,165,81,.3);border-radius:9px;background:rgba(0,165,81,.07);color:var(--green-light);font-size:1.1rem;font-weight:700;text-decoration:none;transition:all .25s;}
+.ph-btn:hover{background:rgba(0,165,81,.18);border-color:rgba(0,165,81,.5);transform:translateY(-2px);}
+.cta-hours{font-size:.78rem;color:rgba(255,255,255,.28);position:relative;z-index:1;}
 
-  /* PRODUCTS */
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 28px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .product-card { padding: 36px 28px; }
-  .product-visual {
-    font-size: 80px;
-    text-align: center;
-    margin-bottom: 20px;
-    animation: bobFloat 3s ease-in-out infinite;
-  }
-  .product-name {
-    font-family: 'Tiro Bangla', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--primary-light);
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  .product-desc {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.7);
-    text-align: center;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-  .product-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 16px;
-    background: rgba(0,165,81,0.2);
-    border: 1px solid rgba(0,165,81,0.4);
-    border-radius: 20px;
-    font-size: 0.82rem;
-    color: var(--primary-light);
-    margin: 4px;
-  }
+/* ══ FOOTER ══ */
+footer{position:relative;z-index:1;background:rgba(0,0,0,.28);border-top:1px solid var(--card-border);padding:52px 52px 26px;}
+.ft-grid{max-width:1200px;margin:0 auto 44px;display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:44px;}
+@media(max-width:768px){.ft-grid{grid-template-columns:1fr;gap:32px;}}
+.ft-logo{height:48px;width:auto;margin-bottom:14px;}
+.ft-tag{font-family:'Tiro Bangla',serif;font-size:.98rem;color:rgba(255,255,255,.8);margin-bottom:9px;}
+.ft-desc{font-size:.83rem;color:var(--muted);line-height:1.78;margin-bottom:22px;}
+.ft-socials{display:flex;gap:9px;}
+.soc{width:34px;height:34px;border-radius:7px;background:rgba(255,255,255,.045);border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;font-size:.95rem;cursor:pointer;transition:all .25s;text-decoration:none;}
+.soc:hover{background:rgba(0,165,81,.14);border-color:rgba(0,165,81,.3);}
+.ft-col h4{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+.ft-col ul li{font-size:.85rem;color:var(--muted);cursor:pointer;transition:color .2s;}
+.ft-col ul li:hover{color:#fff;}
+.ft-bottom{max-width:1200px;margin:0 auto;padding-top:22px;border-top:1px solid var(--card-border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.ft-bottom p{font-size:.78rem;color:rgba(255,255,255,.28);}
+.ft-bottom span{color:rgba(0,165,81,.65);}
 
-  /* PROCESS */
-  .process-steps {
-    display: flex;
-    align-items: flex-start;
-    gap: 0;
-    max-width: 1000px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .step {
-    flex: 1;
-    min-width: 180px;
-    text-align: center;
-    padding: 0 20px;
-    position: relative;
-  }
-  .step:not(:last-child)::after {
-    content: '→';
-    position: absolute;
-    right: -12px;
-    top: 28px;
-    font-size: 1.5rem;
-    color: var(--primary-light);
-  }
-  .step-num {
-    width: 60px; height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin: 0 auto 16px;
-    box-shadow: 0 4px 20px rgba(0,165,81,0.4);
-  }
-  .step-title {
-    font-family: 'Tiro Bangla', serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .step-desc {
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.5;
-  }
+/* ══ UTILS ══ */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.scroll-top{position:fixed;bottom:30px;right:30px;width:42px;height:42px;border-radius:9px;background:var(--green);border:none;color:#fff;font-size:1.1rem;cursor:pointer;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;box-shadow:0 4px 18px rgba(0,165,81,.4);}
+.scroll-top.show{opacity:1;transform:translateY(0);}
+.scroll-top:hover{background:var(--green-dark);transform:translateY(-2px)!important;}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--navy-mid);border:1px solid rgba(0,165,81,.4);color:var(--green-light);padding:13px 26px;border-radius:9px;font-size:.9rem;font-weight:600;z-index:9999;opacity:0;transition:all .4s;box-shadow:0 8px 28px rgba(0,0,0,.4);white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-  /* ABOUT / LOCATION */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    max-width: 1100px;
-    margin: 0 auto;
-    align-items: center;
-  }
-  @media(max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
-
-  .about-info .info-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 18px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-  .info-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(0,165,81,0.25), rgba(54,175,224,0.25));
-    border: 1px solid rgba(255,255,255,0.15);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-  }
-  .info-label {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 4px;
-  }
-  .info-value {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    line-height: 1.4;
-  }
-  .info-value a {
-    color: var(--primary-light);
-    text-decoration: none;
-  }
-  .info-value a:hover { text-decoration: underline; }
-
-  .map-placeholder {
-    border-radius: 20px;
-    overflow: hidden;
-    height: 380px;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 16px;
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.6);
-    position: relative;
-  }
-  .map-pin { font-size: 3rem; animation: bounce 2s ease infinite; }
-  @keyframes bounce {
-    0%,100% { transform: translateY(0); }
-    50%      { transform: translateY(-10px); }
-  }
-
-  /* CONTACT */
-  .contact-wrapper {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  @media(max-width:600px) { .form-row { grid-template-columns: 1fr; } }
-  .form-group { display: flex; flex-direction: column; gap: 8px; }
-  .form-label { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
-  .form-input, .form-textarea, .form-select {
-    padding: 12px 16px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 12px;
-    color: #fff;
-    font-size: 0.95rem;
-    font-family: 'Hind Siliguri', sans-serif;
-    backdrop-filter: blur(10px);
-    outline: none;
-    transition: border 0.3s, background 0.3s;
-  }
-  .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.4); }
-  .form-input:focus, .form-textarea:focus {
-    border-color: var(--primary-light);
-    background: rgba(255,255,255,0.15);
-  }
-  .form-textarea { resize: vertical; min-height: 120px; }
-  .form-select option { color: #000; }
-
-  /* TESTIMONIALS */
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  .testimonial-card { padding: 32px 28px; }
-  .quote-mark {
-    font-size: 3rem;
-    color: var(--primary-light);
-    opacity: 0.5;
-    line-height: 1;
-    margin-bottom: 12px;
-  }
-  .testimonial-text {
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.7;
-    margin-bottom: 20px;
-    font-style: italic;
-  }
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .author-avatar {
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary), var(--water-blue));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem;
-  }
-  .author-name { font-weight: 600; font-size: 0.95rem; }
-  .author-role { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
-  .stars { color: #FFD700; font-size: 0.9rem; margin-top: 2px; }
-
-  /* CTA BANNER */
-  .cta-banner {
-    background: linear-gradient(135deg, rgba(0,165,81,0.25), rgba(54,175,224,0.25));
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 28px;
-    padding: 56px 40px;
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-    backdrop-filter: blur(20px);
-    position: relative;
-    overflow: hidden;
-  }
-  .cta-banner::before {
-    content: '💧';
-    position: absolute;
-    font-size: 200px;
-    opacity: 0.04;
-    top: -20px; right: -20px;
-    pointer-events: none;
-  }
-  .cta-title {
-    font-family: 'Tiro Bangla', serif;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    margin-bottom: 16px;
-  }
-  .cta-desc {
-    color: rgba(255,255,255,0.75);
-    margin-bottom: 32px;
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-  .phone-display {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 32px;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50px;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--primary-light);
-    margin: 0 8px 16px;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-  .phone-display:hover { background: rgba(0,165,81,0.2); transform: scale(1.02); }
-
-  /* FOOTER */
-  footer {
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 48px 40px 24px;
-    position: relative;
-    z-index: 1;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto 40px;
-  }
-  @media(max-width:768px) { .footer-grid { grid-template-columns: 1fr; } }
-  .footer-brand h3 {
-    font-family: 'Tiro Bangla', serif;
-    font-size: 1.6rem;
-    color: var(--primary-light);
-    margin-bottom: 12px;
-  }
-  .footer-brand p {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-  .social-links { display: flex; gap: 12px; }
-  .social-btn {
-    width: 38px; height: 38px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.15);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: all 0.3s;
-    cursor: pointer;
-  }
-  .social-btn:hover { background: rgba(0,165,81,0.3); transform: translateY(-2px); }
-  .footer-col h4 {
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: rgba(255,255,255,0.9);
-    font-size: 1rem;
-  }
-  .footer-col ul { list-style: none; }
-  .footer-col ul li {
-    font-size: 0.88rem;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: color 0.2s;
-  }
-  .footer-col ul li:hover { color: var(--primary-light); }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 24px;
-    text-align: center;
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.4);
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .footer-bottom span { color: var(--primary-light); }
-
-  /* SCROLL REVEAL */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* MOBILE NAV */
-  .hamburger { display: none; font-size: 1.5rem; cursor: pointer; }
-  @media(max-width: 768px) {
-    nav { padding: 12px 20px; }
-    .nav-links { display: none; }
-    .hamburger { display: block; }
-    .hero { padding: 100px 20px 60px; }
-    section { padding: 60px 20px; }
-    .hero-bottle { display: none; }
-    footer { padding: 40px 20px 20px; }
-  }
-
-  /* Scroll to top */
-  .scroll-top {
-    position: fixed;
-    bottom: 30px; right: 30px;
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    border: none;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem;
-    box-shadow: 0 4px 20px rgba(0,165,81,0.5);
-    z-index: 990;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s;
-    color: white;
-  }
-  .scroll-top.show { opacity: 1; transform: translateY(0); }
-
-  /* notification */
-  .toast {
-    position: fixed;
-    bottom: 90px; right: 30px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: #fff;
-    padding: 14px 24px;
-    border-radius: 14px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    z-index: 1100;
-    transform: translateX(200px);
-    opacity: 0;
-    transition: all 0.4s ease;
-    box-shadow: 0 8px 30px rgba(0,165,81,0.4);
-  }
-  .toast.show { transform: translateX(0); opacity: 1; }
-
-  @keyframes fadeInDown {
-    from { opacity:0; transform: translateY(-20px); }
-    to   { opacity:1; transform: translateY(0); }
-  }
-  @keyframes fadeInUp {
-    from { opacity:0; transform: translateY(20px); }
-    to   { opacity:1; transform: translateY(0); }
-  }
-
-  /* divider */
-  .wave-divider {
-    text-align: center;
-    font-size: 2rem;
-    opacity: 0.3;
-    letter-spacing: 8px;
-    padding: 8px 0;
-  }
+/* ══ RESPONSIVE ══ */
+@media(max-width:960px){
+  .hero{flex-direction:column;text-align:center;padding:96px 28px 60px;gap:0;}
+  .hero-sub{margin:0 auto 34px;}
+  .hero-btns{justify-content:center;}
+  .hero-stats{justify-content:center;gap:28px;}
+  .hero-right{display:none;}
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .sec{padding:70px 24px;}
+  .trust{padding:22px 24px;}
+  .trust-inner{gap:20px;}
+  .cta-sec{padding:56px 24px;}
+  .cta-box{padding:38px 22px;}
+  .order-card{padding:26px 18px;}
+  footer{padding:44px 24px 22px;}
+}
+@media(max-width:600px){
+  .ft-bottom{flex-direction:column;text-align:center;}
+  .proc-grid::before{display:none;}
+}
 </style>
 </head>
 <body>
 
-<!-- BG Bubbles -->
-<div class="bg-bubbles">
-  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
-  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
-  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+<div class="bg-wrap">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
 </div>
+<div class="topbar"></div>
 
-<!-- Top wave bar -->
-<div class="wave-top"></div>
-
-<!-- NAVBAR -->
-<nav id="navbar">
-  <div class="nav-logo">
-    <div class="nav-logo-circle">💧</div>
-    <div class="nav-brand">ফ্রেশ ফ্লো</div>
+<!-- ░░ NAVBAR ░░ -->
+<nav id="nav">
+  <div class="nav-left">
+    <img src="logo.svg" alt="Fresh Flow" class="nav-logo">
+    <div class="nav-brand">
+      <span class="nb-main">ফ্রেশ ফ্লো</span>
+      <span class="nb-sub">Royal Choice Food &amp; Beverage</span>
+    </div>
   </div>
-  <ul class="nav-links">
-    <li><a href="#features">বৈশিষ্ট্য</a></li>
-    <li><a href="#products">পণ্যসমূহ</a></li>
-    <li><a href="#process">প্রক্রিয়া</a></li>
-    <li><a href="#about">আমাদের সম্পর্কে</a></li>
-    <li><a href="#contact" class="nav-cta">যোগাযোগ করুন</a></li>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#features">সুবিধা</a></li>
+    <li><a href="#seal">সিল গ্যারান্টি</a></li>
+    <li><a href="#products">পণ্য</a></li>
+    <li><a href="#delivery">ডেলিভারি</a></li>
+    <li><a href="#location">অবস্থান</a></li>
+    <li><a href="#order" class="nav-cta">অর্ডার করুন</a></li>
   </ul>
-  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-bottle">🫙</div>
-  <div class="hero-content">
-    <div class="hero-badge">✨ ফরিদপুরের সেরা পানি সরবরাহকারী</div>
-    <h1 class="hero-title">
-      <span class="green">ফ্রেশ ফ্লো</span><br>
-      <span class="blue">প্যাকেজড ড্রিংকিং</span><br>
-      ওয়াটার
-    </h1>
-    <p class="hero-subtitle">
-      সকলের সুস্বাস্থ্যই আমাদের লক্ষ্য। বিশুদ্ধ ও স্বাস্থ্যকর পানি পৌঁছে দিচ্ছি আপনার দোরগোড়ায় — হোম ডেলিভারি সহ বিভিন্ন প্রতিষ্ঠানে।
-    </p>
-    <div class="hero-buttons">
-      <a href="tel:01312996655" class="btn-primary">📞 এখনই অর্ডার করুন</a>
-      <a href="#products" class="btn-glass">পণ্য দেখুন →</a>
+<!-- ░░ HERO ░░ -->
+<section id="home" style="position:relative;z-index:1;">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>ফরিদপুরের বিশ্বস্ত পানীয় জল</div>
+      <p class="company-line">Royal Choice Food &amp; Beverage Mfg. · <span>ফরিদপুর, বাংলাদেশ</span></p>
+      <h1 class="hero-title">
+        প্রকৃতির মতো <span class="hl-g">বিশুদ্ধ,</span><br>
+        স্বাস্থ্যের মতো <span class="hl-b">নির্ভরযোগ্য।</span>
+      </h1>
+      <p class="hero-sub">RO ও UV প্রযুক্তিতে পরিশোধিত, BSTI অনুমোদিত ফ্রেশ ফ্লো পানীয় জল — প্রতিটি ফোঁটায় স্বাস্থ্য ও বিশ্বাস।</p>
+      <div class="hero-btns">
+        <a href="#order" class="btn-p">🚚 অর্ডার করুন</a>
+        <a href="#products" class="btn-o">পণ্য দেখুন →</a>
+      </div>
+      <div class="hero-stats">
+        <div><span class="stat-n">৫<sup>+</sup></span><span class="stat-l">বছরের অভিজ্ঞতা</span></div>
+        <div><span class="stat-n">৫০০<sup>+</sup></span><span class="stat-l">নিয়মিত গ্রাহক</span></div>
+        <div><span class="stat-n">৭</span><span class="stat-l">দিন ডেলিভারি</span></div>
+        <div><span class="stat-n">১৫<sup>+</sup></span><span class="stat-l">ধাপের বিশোধন</span></div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-number">৫০০+</span>
-        <span class="stat-label">সন্তুষ্ট গ্রাহক</span>
+    <div class="hero-right">
+      <div class="v-ring-wrap">
+        <div class="v-ring r1"></div>
+        <div class="v-ring r2"></div>
+        <div class="v-ring r3"></div>
+        <div class="v-center">
+          <img src="logo.svg" alt="Fresh Flow" class="v-logo">
+          <div class="v-cert">BSTI Certified<br>ISO Compliant</div>
+        </div>
       </div>
-      <div class="stat-item">
-        <span class="stat-number">১০০%</span>
-        <span class="stat-label">বিশুদ্ধ পানি</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">২৪/৭</span>
-        <span class="stat-label">ডেলিভারি সেবা</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">RO</span>
-        <span class="stat-label">পরিশোধন প্রযুক্তি</span>
-      </div>
+      <div class="fbadge fbadge-1"><div class="bd bd-g"></div>RO + UV বিশুদ্ধ</div>
+      <div class="fbadge fbadge-2"><div class="bd bd-b"></div>হোম ডেলিভারি</div>
+      <div class="fbadge fbadge-3"><div class="bd bd-g"></div>সাশ্রয়ী মূল্য</div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section id="features">
-  <div class="section-header reveal">
-    <div class="section-tag">কেন আমাদের বেছে নেবেন</div>
-    <h2 class="section-title">আমাদের <span class="gradient-text">বিশেষত্ব</span></h2>
-    <p class="section-desc">আমরা শুধু পানি দিই না — দিই স্বাস্থ্য, বিশ্বাস আর মানের নিশ্চয়তা।</p>
+<!-- ░░ TRUST STRIP ░░ -->
+<div class="trust reveal">
+  <div class="trust-inner">
+    <div class="t-item"><div class="t-icon">✅</div>BSTI অনুমোদিত</div>
+    <div class="t-item"><div class="t-icon">🔬</div>ISO মান নিশ্চিত</div>
+    <div class="t-item"><div class="t-icon">💧</div>১৫+ ধাপে পরিশোধন</div>
+    <div class="t-item"><div class="t-icon">🚚</div>দ্রুত ডেলিভারি</div>
+    <div class="t-item"><div class="t-icon">📞</div>সকাল ৭টা — রাত ১০টা</div>
   </div>
-  <div class="features-grid">
-    <div class="glass-card feature-card reveal">
-      <div class="feature-icon">🔬</div>
-      <h3 class="feature-title">আধুনিক পরিশোধন</h3>
-      <p class="feature-desc">RO (রিভার্স অসমোসিস) প্রযুক্তি ব্যবহার করে পানি শতভাগ বিশুদ্ধ করা হয়। সকল ব্যাকটেরিয়া ও ক্ষতিকর পদার্থ দূর করা হয়।</p>
+</div>
+
+<!-- ░░ FEATURES ░░ -->
+<section class="sec" id="features">
+  <div class="si">
+    <div class="sec-hdr cx reveal">
+      <div class="sec-lbl">কেন ফ্রেশ ফ্লো</div>
+      <h2 class="sec-title">যে কারণে আমরা <span class="hl-g">আলাদা</span></h2>
+      <p class="sec-desc">শুধু পানি নয় — সুস্বাস্থ্যের নিশ্চয়তা। প্রতিটি পণ্য কঠোর মান নিয়ন্ত্রণে তৈরি।</p>
     </div>
-    <div class="glass-card feature-card reveal">
-      <div class="feature-icon">🚚</div>
-      <h3 class="feature-title">দ্রুত হোম ডেলিভারি</h3>
-      <p class="feature-desc">ঘরে বসে অর্ডার করুন, আমরা পৌঁছে দেব। ফরিদপুরের যেকোনো স্থানে দ্রুত ও নির্ভরযোগ্য ডেলিভারি সার্ভিস।</p>
-    </div>
-    <div class="glass-card feature-card reveal">
-      <div class="feature-icon">🏢</div>
-      <h3 class="feature-title">প্রতিষ্ঠান সরবরাহ</h3>
-      <p class="feature-desc">অফিস, স্কুল, হাসপাতাল ও বিভিন্ন প্রতিষ্ঠানে নিয়মিত পানি সরবরাহ করি। বাল্ক অর্ডারে বিশেষ ছাড়।</p>
-    </div>
-    <div class="glass-card feature-card reveal">
-      <div class="feature-icon">✅</div>
-      <h3 class="feature-title">মান নিয়ন্ত্রণ</h3>
-      <p class="feature-desc">প্রতিটি ব্যাচ উৎপাদনের আগে ও পরে কঠোর গুণমান পরীক্ষা করা হয়। আন্তর্জাতিক মানদণ্ড অনুযায়ী প্যাকেজিং।</p>
-    </div>
-    <div class="glass-card feature-card reveal">
-      <div class="feature-icon">💰</div>
-      <h3 class="feature-title">সাশ্রয়ী মূল্য</h3>
-      <p class="feature-desc">সর্বোচ্চ মানের পানি সবচেয়ে সাশ্রয়ী মূল্যে। নিয়মিত গ্রাহকদের জন্য বিশেষ ডিসকাউন্ট অফার।</p>
-    </div>
-    <div class="glass-card feature-card reveal">
-      <div class="feature-icon">🌿</div>
-      <h3 class="feature-title">পরিবেশবান্ধব</h3>
-      <p class="feature-desc">পুনর্ব্যবহারযোগ্য বোতল ব্যবহার করি। পরিবেশ রক্ষায় আমরা সচেতন ও দায়িত্বশীল।</p>
+    <div class="feat-grid">
+      <div class="card feat-card reveal"><div class="feat-icon fi-b">💧</div><h3 class="feat-title">RO পরিশোধন</h3><p class="feat-desc">Reverse Osmosis প্রযুক্তিতে ক্ষতিকর ধাতু, ব্যাকটেরিয়া ও রাসায়নিক উপাদান সম্পূর্ণ অপসারণ।</p></div>
+      <div class="card feat-card reveal"><div class="feat-icon fi-t">☀️</div><h3 class="feat-title">UV জীবাণুমুক্তকরণ</h3><p class="feat-desc">অতিবেগুনি রশ্মির মাধ্যমে ক্ষতিকর জীবাণু ও ভাইরাস সম্পূর্ণরূপে ধ্বংস করা হয়।</p></div>
+      <div class="card feat-card reveal"><div class="feat-icon fi-g">🏷️</div><h3 class="feat-title">BSTI অনুমোদিত</h3><p class="feat-desc">বাংলাদেশ স্ট্যান্ডার্ডস ইনস্টিটিউশনের সকল মান পূরণ করে আমাদের পণ্য উৎপাদিত।</p></div>
+      <div class="card feat-card reveal"><div class="feat-icon fi-b">📦</div><h3 class="feat-title">স্বাস্থ্যকর প্যাকেজিং</h3><p class="feat-desc">খাদ্যমান অনুমোদিত নিরাপদ কন্টেইনারে প্যাক — বিশুদ্ধতা অক্ষুণ্ণ থাকে সবসময়।</p></div>
+      <div class="card feat-card reveal"><div class="feat-icon fi-g">🚚</div><h3 class="feat-title">দ্রুত হোম ডেলিভারি</h3><p class="feat-desc">ফরিদপুর শহর ও আশপাশ এলাকায় সপ্তাহে ৭ দিন দ্রুত ডেলিভারি সেবা।</p></div>
+      <div class="card feat-card reveal"><div class="feat-icon fi-t">💰</div><h3 class="feat-title">সাশ্রয়ী মূল্য</h3><p class="feat-desc">সর্বোচ্চ মানের বিশুদ্ধ পানি সকলের নাগালে রাখতে প্রতিযোগিতামূলক মূল্যে সরবরাহ।</p></div>
     </div>
   </div>
 </section>
 
-<!-- PRODUCTS -->
-<section id="products" style="background: rgba(0,0,0,0.15);">
-  <div class="section-header reveal">
-    <div class="section-tag">আমাদের পণ্য</div>
-    <h2 class="section-title">পানির <span class="gradient-text">প্যাকেজসমূহ</span></h2>
-    <p class="section-desc">আপনার প্রয়োজন অনুযায়ী বিভিন্ন সাইজের পানির বোতল পাওয়া যায়।</p>
+<!-- ░░ FACTORY SEAL ░░ -->
+<section class="sec sec-alt" id="seal">
+  <div class="si">
+
+    <!-- headline -->
+    <div class="sec-hdr cx reveal">
+      <div class="sec-lbl">আমাদের প্রতিশ্রুতি</div>
+      <h2 class="sec-title">সিল দেখুন, <span class="hl-g">বিশ্বাস রাখুন।</span></h2>
+      <p class="sec-desc">বাজারের বেশিরভাগ পানি সিল ছাড়া ভরে বিক্রি হয় — আপনি জানতেও পারেন না ভেতরে কী আছে।<br>আমরা ভিন্ন।</p>
+    </div>
+
+    <!-- comparison block -->
+    <div class="reveal" style="display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;max-width:900px;margin:0 auto 64px;">
+
+      <!-- Others -->
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);border-radius:16px;padding:32px 28px;text-align:center;">
+        <div style="font-size:2.6rem;margin-bottom:14px;filter:grayscale(1);opacity:.6;">🫙</div>
+        <div style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(239,68,68,.8);font-weight:700;margin-bottom:10px;">বাজারের অন্যরা</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;text-align:left;">
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.86rem;color:rgba(255,255,255,.55);">
+            <span style="color:rgba(239,68,68,.8);font-size:1rem;flex-shrink:0;margin-top:1px;">✗</span>
+            সিল ছাড়া পানি ভরে বিক্রি
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.86rem;color:rgba(255,255,255,.55);">
+            <span style="color:rgba(239,68,68,.8);font-size:1rem;flex-shrink:0;margin-top:1px;">✗</span>
+            ভেতরের পানির মান অজানা
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.86rem;color:rgba(255,255,255,.55);">
+            <span style="color:rgba(239,68,68,.8);font-size:1rem;flex-shrink:0;margin-top:1px;">✗</span>
+            ডেলিভারির পর ট্যাম্পার করা সম্ভব
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.86rem;color:rgba(255,255,255,.55);">
+            <span style="color:rgba(239,68,68,.8);font-size:1rem;flex-shrink:0;margin-top:1px;">✗</span>
+            কাস্টমারের স্বাস্থ্য ঝুঁকিতে
+          </li>
+        </ul>
+      </div>
+
+      <!-- VS divider -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="width:1px;height:40px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.12));"></div>
+        <div style="width:42px;height:42px;border-radius:50%;background:var(--navy-mid);border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--muted);">VS</div>
+        <div style="width:1px;height:40px;background:linear-gradient(to top,transparent,rgba(255,255,255,.12));"></div>
+      </div>
+
+      <!-- Fresh Flow -->
+      <div style="background:rgba(0,165,81,.07);border:1px solid rgba(0,165,81,.22);border-radius:16px;padding:32px 28px;text-align:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:10px;right:12px;padding:3px 10px;background:var(--green);border-radius:20px;font-size:.65rem;font-weight:700;letter-spacing:.06em;">আমাদের পার্থক্য</div>
+        <div style="font-size:2.6rem;margin-bottom:14px;">🫙</div>
+        <div style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green-light);font-weight:700;margin-bottom:10px;">ফ্রেশ ফ্লো</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;text-align:left;">
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.86rem;color:rgba(255,255,255,.8);">
+            <span style="color:var(--green-light);font-size:1rem;flex-shrink:0;margin-top:1px;">✓</span>
+            কারখানায় ফ্যাক্টরি সিল করা
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.86rem;color:rgba(255,255,255,.8);">
+            <span style="color:var(--green-light);font-size:1rem;flex-shrink:0;margin-top:1px;">✓</span>
+            সিল অক্ষত থাকলে পানি ১০০% বিশুদ্ধ
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.86rem;color:rgba(255,255,255,.8);">
+            <span style="color:var(--green-light);font-size:1rem;flex-shrink:0;margin-top:1px;">✓</span>
+            ট্যাম্পার-প্রুফ — খোলা হলে বোঝা যায়
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.86rem;color:rgba(255,255,255,.8);">
+            <span style="color:var(--green-light);font-size:1rem;flex-shrink:0;margin-top:1px;">✓</span>
+            আপনার পরিবারের স্বাস্থ্য সুরক্ষিত
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Big seal highlight banner -->
+    <div class="reveal" style="background:linear-gradient(135deg,rgba(0,165,81,.1) 0%,rgba(54,175,224,.07) 100%);border:1px solid rgba(0,165,81,.2);border-radius:20px;padding:48px 44px;display:flex;align-items:center;gap:48px;flex-wrap:wrap;max-width:960px;margin:0 auto;position:relative;overflow:hidden;">
+      <!-- bg watermark -->
+      <div style="position:absolute;right:-10px;bottom:-20px;font-size:9rem;opacity:.04;user-select:none;pointer-events:none;line-height:1;">🔒</div>
+
+      <!-- seal icon animated -->
+      <div style="flex-shrink:0;text-align:center;">
+        <div style="width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(0,165,81,.2),rgba(0,165,81,.05));border:2px solid rgba(0,165,81,.35);display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto;animation:sealPulse 3s ease-in-out infinite;">🔒</div>
+        <div style="margin-top:12px;font-size:.72rem;color:var(--green-light);font-weight:700;letter-spacing:.1em;text-transform:uppercase;">ফ্যাক্টরি সিল</div>
+      </div>
+
+      <!-- text -->
+      <div style="flex:1;min-width:240px;">
+        <div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green-light);font-weight:700;margin-bottom:10px;">আমাদের অঙ্গীকার</div>
+        <h3 style="font-family:'Tiro Bangla',serif;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:700;line-height:1.3;margin-bottom:14px;">
+          প্রতিটি বোতল ও জারের মুখে<br>
+          <span style="color:var(--green-light);">কারখানার সিল</span> — গ্যারান্টি দেয়<br>
+          ইন্টেক বিশুদ্ধতার।
+        </h3>
+        <p style="font-size:.9rem;color:var(--muted);line-height:1.78;margin-bottom:20px;">আমরা পানি ভরার সাথে সাথেই কারখানায় প্রতিটি বোতল ও জারের মুখ <strong style="color:rgba(255,255,255,.85);">ট্যাম্পার-প্রুফ ফ্যাক্টরি সিল</strong> দিয়ে বন্ধ করে দিই। আপনার হাতে পৌঁছানোর আগে কেউ সেই সিল ভাঙতে পারে না — তাই আপনি পান একদম <strong style="color:var(--green-light);">ইন্টেক ও অবিকৃত</strong> বিশুদ্ধ পানি।</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(0,165,81,.12);border:1px solid rgba(0,165,81,.25);border-radius:6px;font-size:.78rem;font-weight:700;color:var(--green-light);">🔒 ট্যাম্পার-প্রুফ</span>
+          <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(54,175,224,.1);border:1px solid rgba(54,175,224,.22);border-radius:6px;font-size:.78rem;font-weight:700;color:var(--blue-light);">✅ ফ্যাক্টরি সিলড</span>
+          <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(0,165,81,.12);border:1px solid rgba(0,165,81,.25);border-radius:6px;font-size:.78rem;font-weight:700;color:var(--green-light);">💯 ইন্টেক গ্যারান্টি</span>
+        </div>
+      </div>
+    </div>
+
   </div>
-  <div class="products-grid">
-    <div class="glass-card product-card reveal" style="text-align:center;">
-      <div class="product-visual">🫙</div>
-      <div class="product-name">১৯ লিটার জার</div>
-      <p class="product-desc">অফিস ও পরিবারের জন্য আদর্শ বড় জার। ওয়াটার ডিসপেন্সারে ব্যবহারযোগ্য।</p>
-      <div>
-        <span class="product-badge">✓ পুনর্ব্যবহারযোগ্য</span>
-        <span class="product-badge">✓ RO পিউরিফাইড</span>
-      </div>
+</section>
+<style>
+@keyframes sealPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,165,81,.3);}50%{box-shadow:0 0 0 14px rgba(0,165,81,0);}}
+@media(max-width:640px){
+  [style*="grid-template-columns:1fr auto 1fr"]{grid-template-columns:1fr!important;}
+  [style*="display:flex;flex-direction:column;align-items:center;gap:8px"]{display:none!important;}
+}
+</style>
+
+<!-- ░░ PRODUCTS ░░ -->
+<section class="sec sec-alt" id="products">
+  <div class="si">
+    <div class="sec-hdr cx reveal">
+      <div class="sec-lbl">আমাদের পণ্য</div>
+      <h2 class="sec-title">সব চাহিদায় <span class="hl-b">সঠিক পানি</span></h2>
+      <p class="sec-desc">পরিবার, অফিস বা বাণিজ্যিক প্রয়োজনে — সব ধরনের প্যাকেজ আমাদের কাছে।</p>
     </div>
-    <div class="glass-card product-card reveal" style="text-align:center;">
-      <div class="product-visual" style="font-size:65px">🍶</div>
-      <div class="product-name">১ লিটার বোতল</div>
-      <p class="product-desc">যেকোনো অনুষ্ঠান ও দৈনন্দিন ব্যবহারের জন্য সুবিধাজনক। ক্যারি করতে সহজ।</p>
-      <div>
-        <span class="product-badge">✓ BPA ফ্রি</span>
-        <span class="product-badge">✓ সিলড প্যাক</span>
-      </div>
-    </div>
-    <div class="glass-card product-card reveal" style="text-align:center;">
-      <div class="product-visual" style="font-size:50px">🧴</div>
-      <div class="product-name">৫০০ মি.লি বোতল</div>
-      <p class="product-desc">ভ্রমণ ও পথে চলার জন্য ছোট ও হালকা পানির বোতল। স্কুল-কলেজের জন্য পারফেক্ট।</p>
-      <div>
-        <span class="product-badge">✓ পোর্টেবল</span>
-        <span class="product-badge">✓ হালকা ওজন</span>
-      </div>
-    </div>
-    <div class="glass-card product-card reveal" style="text-align:center;">
-      <div class="product-visual" style="font-size:70px">🏺</div>
-      <div class="product-name">কাস্টম বাল্ক অর্ডার</div>
-      <p class="product-desc">বিবাহ, অনুষ্ঠান বা কর্পোরেট ইভেন্টের জন্য বিশেষ ব্যবস্থায় বড় পরিমাণে সরবরাহ।</p>
-      <div>
-        <span class="product-badge">✓ বিশেষ মূল্য</span>
-        <span class="product-badge">✓ দ্রুত ডেলিভারি</span>
-      </div>
+    <div class="prod-grid">
+      <div class="card reveal"><div class="prod-head"><div class="prod-icon">🫙</div><div><div class="prod-name">১৯ লিটার জার</div><div class="prod-vol">JUMBO JAR · 19L</div></div></div><div class="prod-body"><p class="prod-desc">পরিবার ও অফিসের জন্য সবচেয়ে সাশ্রয়ী ও জনপ্রিয় বিকল্প। পুনর্ব্যবহারযোগ্য — ডিসপেন্সারে সহজে ব্যবহারযোগ্য।</p><div class="prod-tags"><span class="ptag ptg">সবচেয়ে জনপ্রিয়</span><span class="ptag ptb">পুনর্ব্যবহারযোগ্য</span><span class="ptag ptg">হোম ডেলিভারি</span></div></div></div>
+      <div class="card reveal"><div class="prod-head"><div class="prod-icon">🍶</div><div><div class="prod-name">১ লিটার বোতল</div><div class="prod-vol">BOTTLE · 1L (CARTON)</div></div></div><div class="prod-body"><p class="prod-desc">ভ্রমণ, অফিস ও ব্যক্তিগত ব্যবহারে আদর্শ। কার্টনে ১২টি বোতল — রেস্তোরাঁ ও ইভেন্টে পারফেক্ট।</p><div class="prod-tags"><span class="ptag ptb">ক্যারি ফ্রেন্ডলি</span><span class="ptag ptg">রেস্তোরাঁ প্যাক</span></div></div></div>
+      <div class="card reveal"><div class="prod-head"><div class="prod-icon">💧</div><div><div class="prod-name">৫০০ মি.লি বোতল</div><div class="prod-vol">BOTTLE · 500ml (CARTON)</div></div></div><div class="prod-body"><p class="prod-desc">একক ব্যবহার, ইভেন্ট ক্যাটারিং ও উপহারে আদর্শ। কার্টনে ২৪টি বোতল, সহজে বহনযোগ্য।</p><div class="prod-tags"><span class="ptag ptb">ইভেন্ট পারফেক্ট</span><span class="ptag ptg">কমপ্যাক্ট</span></div></div></div>
+      <div class="card reveal"><div class="prod-head"><div class="prod-icon">🏭</div><div><div class="prod-name">বাল্ক / কাস্টম অর্ডার</div><div class="prod-vol">BULK / CUSTOM ORDER</div></div></div><div class="prod-body"><p class="prod-desc">হাসপাতাল, স্কুল, শিল্প প্রতিষ্ঠান বা বড় ইভেন্টের জন্য বিশেষ বাল্ক সুবিধা। আলোচনায় বিশেষ ছাড়।</p><div class="prod-tags"><span class="ptag ptg">কর্পোরেট</span><span class="ptag ptb">বিশেষ ছাড়</span><span class="ptag ptg">কাস্টম লেবেল</span></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
-<section id="process">
-  <div class="section-header reveal">
-    <div class="section-tag">আমাদের প্রক্রিয়া</div>
-    <h2 class="section-title">পানি পরিশোধনের <span class="gradient-text">ধাপসমূহ</span></h2>
-    <p class="section-desc">আধুনিক প্রযুক্তিতে কয়েকটি ধাপে পানি সম্পূর্ণ বিশুদ্ধ করা হয়।</p>
-  </div>
-  <div class="process-steps reveal">
-    <div class="step">
-      <div class="step-num">১</div>
-      <div class="step-title">উৎস সংগ্রহ</div>
-      <p class="step-desc">গভীর নলকূপ বা বিশুদ্ধ উৎস থেকে কাঁচা পানি সংগ্রহ</p>
+<!-- ░░ PROCESS ░░ -->
+<section class="sec" id="process">
+  <div class="si">
+    <div class="sec-hdr cx reveal">
+      <div class="sec-lbl">পরিশোধন প্রক্রিয়া</div>
+      <h2 class="sec-title">কীভাবে তৈরি হয় <span class="hl-g">ফ্রেশ ফ্লো</span></h2>
+      <p class="sec-desc">১৫টিরও বেশি ধাপে কঠোর মান নিয়ন্ত্রণের মধ্য দিয়ে পরিশোধিত হয় প্রতিটি ফোঁটা।</p>
     </div>
-    <div class="step">
-      <div class="step-num">২</div>
-      <div class="step-title">প্রাথমিক ফিল্টার</div>
-      <p class="step-desc">সেডিমেন্ট ও বড় কণা অপসারণের জন্য মাল্টি-স্টেজ ফিল্টারিং</p>
-    </div>
-    <div class="step">
-      <div class="step-num">৩</div>
-      <div class="step-title">RO পরিশোধন</div>
-      <p class="step-desc">রিভার্স অসমোসিস মেম্ব্রেনে ৯৯% দূষক অপসারণ</p>
-    </div>
-    <div class="step">
-      <div class="step-num">৪</div>
-      <div class="step-title">UV স্টেরিলাইজেশন</div>
-      <p class="step-desc">আলট্রাভায়োলেট রশ্মিতে সকল ব্যাকটেরিয়া ধ্বংস</p>
-    </div>
-    <div class="step">
-      <div class="step-num">৫</div>
-      <div class="step-title">প্যাকেজিং</div>
-      <p class="step-desc">সিলড ও স্বাস্থ্যসম্মত পরিবেশে বোতলজাত ও সরবরাহ</p>
+    <div class="proc-grid reveal">
+      <div class="proc-step"><div class="step-circ"><span class="step-lbl">Step 01</span><span class="step-ico">🌊</span></div><h4 class="step-t">উৎস সংগ্রহ</h4><p class="step-d">গভীর নলকূপ থেকে বিশুদ্ধ ভূগর্ভস্থ পানি সংগ্রহ।</p></div>
+      <div class="proc-step"><div class="step-circ"><span class="step-lbl">Step 02</span><span class="step-ico">🧪</span></div><h4 class="step-t">প্রাথমিক ফিল্টার</h4><p class="step-d">মাল্টি-লেয়ার সেডিমেন্ট ফিল্টারে বড় কণা অপসারণ।</p></div>
+      <div class="proc-step"><div class="step-circ"><span class="step-lbl">Step 03</span><span class="step-ico">💠</span></div><h4 class="step-t">RO পরিশোধন</h4><p class="step-d">RO মেমব্রেনে ক্ষতিকর উপাদান সম্পূর্ণ পৃথক।</p></div>
+      <div class="proc-step"><div class="step-circ"><span class="step-lbl">Step 04</span><span class="step-ico">☀️</span></div><h4 class="step-t">UV স্টেরিলাইজেশন</h4><p class="step-d">UV রশ্মিতে সকল জীবাণু ও ভাইরাস সম্পূর্ণ ধ্বংস।</p></div>
+      <div class="proc-step"><div class="step-circ"><span class="step-lbl">Step 05</span><span class="step-ico">🔬</span></div><h4 class="step-t">মান পরীক্ষা</h4><p class="step-d">BSTI মানদণ্ডে ল্যাবরেটরিতে প্রতিটি ব্যাচ পরীক্ষিত।</p></div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section style="background: rgba(0,0,0,0.1);">
-  <div class="section-header reveal">
-    <div class="section-tag">গ্রাহকদের মতামত</div>
-    <h2 class="section-title">তারা কী <span class="gradient-text">বলছেন</span></h2>
-  </div>
-  <div class="testimonials-grid">
-    <div class="glass-card testimonial-card reveal">
-      <div class="quote-mark">"</div>
-      <p class="testimonial-text">ফ্রেশ ফ্লোর পানি পেয়ে আমাদের পরিবার অনেক উপকৃত হয়েছে। ডেলিভারি সময়মতো হয় এবং পানির গুণমান অসাধারণ।</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">👨</div>
-        <div>
-          <div class="author-name">মোঃ রফিকুল ইসলাম</div>
-          <div class="author-role">ফরিদপুর শহর</div>
-          <div class="stars">★★★★★</div>
-        </div>
-      </div>
+<!-- ░░ DELIVERY COVERAGE ░░ -->
+<section class="sec sec-alt" id="delivery">
+  <div class="si">
+    <div class="sec-hdr cx reveal">
+      <div class="sec-lbl">ডেলিভারি কভারেজ</div>
+      <h2 class="sec-title">আপনার এলাকায় <span class="hl-b">আমাদের টিম</span></h2>
+      <p class="sec-desc">ফরিদপুরের প্রতিটি কোণে আমাদের নিবেদিত ডেলিভারি টিম সর্বদা প্রস্তুত। সরাসরি আপনার এরিয়ার দায়িত্বশীলকে কল করুন।</p>
     </div>
-    <div class="glass-card testimonial-card reveal">
-      <div class="quote-mark">"</div>
-      <p class="testimonial-text">আমাদের অফিসে নিয়মিত ১৯ লিটারের জার সরবরাহ করে। দাম সাশ্রয়ী এবং সার্ভিস চমৎকার। সবাইকে রিকমেন্ড করব।</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">👩</div>
-        <div>
-          <div class="author-name">সুমাইয়া বেগম</div>
-          <div class="author-role">ব্যবসায়ী, স্যুইচগেট বাজার</div>
-          <div class="stars">★★★★★</div>
-        </div>
-      </div>
-    </div>
-    <div class="glass-card testimonial-card reveal">
-      <div class="quote-mark">"</div>
-      <p class="testimonial-text">বিয়ের অনুষ্ঠানে বাল্ক অর্ডার দিয়েছিলাম। সময়মতো সরবরাহ পেয়েছি এবং সবাই পানির মান নিয়ে প্রশংসা করেছে।</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">👨‍💼</div>
-        <div>
-          <div class="author-name">আব্দুল করিম</div>
-          <div class="author-role">রঘুনন্দনপুর</div>
-          <div class="stars">★★★★★</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="del-grid">
 
-<!-- ABOUT & CONTACT -->
-<section id="about">
-  <div class="section-header reveal">
-    <div class="section-tag">আমাদের সম্পর্কে</div>
-    <h2 class="section-title">যোগাযোগ ও <span class="gradient-text">অবস্থান</span></h2>
-  </div>
-  <div class="about-grid">
-    <div class="about-info glass-card reveal" style="padding: 36px;">
-      <div class="info-row">
-        <div class="info-icon">📍</div>
-        <div>
-          <div class="info-label">আমাদের ঠিকানা</div>
-          <div class="info-value">রঘুনন্দনপুর, স্যুইচগেট বাজার, ফরিদপুর</div>
+      <!-- Office Lines — full width card -->
+      <div class="card del-card reveal" style="grid-column:1/-1;">
+        <div class="del-head office" style="flex-wrap:wrap;gap:16px;padding:22px 26px;">
+          <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+            <span style="font-size:1.4rem;">🏢</span>
+            <div>
+              <div style="font-size:.95rem;font-weight:700;color:#fff;">মেইন অফিস</div>
+              <div style="font-size:.72rem;color:var(--muted);letter-spacing:.04em;">সকল অর্ডার, তথ্য ও বাল্ক অর্ডারের জন্য যোগাযোগ করুন</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-left:auto;">
+            <a href="tel:01312996655" style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:rgba(0,165,81,.12);border:1px solid rgba(0,165,81,.25);border-radius:8px;color:var(--green-light);font-size:.88rem;font-weight:700;text-decoration:none;transition:all .25s;" onmouseover="this.style.background='rgba(0,165,81,.22)'" onmouseout="this.style.background='rgba(0,165,81,.12)'">📞 ০১৩১২-৯৯৬৬৫৫</a>
+            <a href="tel:01334952210" style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:rgba(0,165,81,.12);border:1px solid rgba(0,165,81,.25);border-radius:8px;color:var(--green-light);font-size:.88rem;font-weight:700;text-decoration:none;transition:all .25s;" onmouseover="this.style.background='rgba(0,165,81,.22)'" onmouseout="this.style.background='rgba(0,165,81,.12)'">📞 ০১৩৩৪-৯৫২২১০</a>
+            <a href="tel:01745862522" style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:rgba(54,175,224,.1);border:1px solid rgba(54,175,224,.22);border-radius:8px;color:var(--blue-light);font-size:.88rem;font-weight:700;text-decoration:none;transition:all .25s;" onmouseover="this.style.background='rgba(54,175,224,.2)'" onmouseout="this.style.background='rgba(54,175,224,.1)'">📱 ০১৭৪৫-৮৬২৫২২</a>
+            <a href="tel:01312996699" style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:rgba(54,175,224,.1);border:1px solid rgba(54,175,224,.22);border-radius:8px;color:var(--blue-light);font-size:.88rem;font-weight:700;text-decoration:none;transition:all .25s;" onmouseover="this.style.background='rgba(54,175,224,.2)'" onmouseout="this.style.background='rgba(54,175,224,.1)'">📱 ০১৩১২-৯৯৬৬৯৯</a>
+          </div>
         </div>
-      </div>
-      <div class="info-row">
-        <div class="info-icon">📱</div>
-        <div>
-          <div class="info-label">অফিস নম্বর</div>
-          <div class="info-value"><a href="tel:01312996655">০১৩১২-৯৯৬৬৫৫</a></div>
-        </div>
-      </div>
-      <div class="info-row">
-        <div class="info-icon">📞</div>
-        <div>
-          <div class="info-label">মোবাইল</div>
-          <div class="info-value">
-            <a href="tel:01745862522">০১৭৪৫-৮৬২৫২২</a><br>
-            <a href="tel:01312996699">০১৩১২-৯৯৬৬৯৯</a>
+        <div class="del-body">
+          <div class="del-areas">
+            <span class="area-tag">সকল এরিয়া অর্ডার</span>
+            <span class="area-tag">সাধারণ তথ্য</span>
+            <span class="area-tag">বাল্ক অর্ডার</span>
+            <span class="area-tag">কাস্টম অর্ডার</span>
           </div>
         </div>
       </div>
-      <div class="info-row">
-        <div class="info-icon">🕐</div>
-        <div>
-          <div class="info-label">সেবার সময়</div>
-          <div class="info-value">সকাল ৭টা — রাত ১০টা (সপ্তাহের প্রতিদিন)</div>
+
+      <!-- Shahidul -->
+      <div class="card del-card reveal">
+        <div class="del-head">
+          <span class="del-num-badge">01334952211</span>
+          <div class="del-agent">
+            <span class="del-agent-name">শহিদুল</span>
+            <span class="del-agent-role">👤 ডেলিভারি এজেন্ট</span>
+          </div>
+        </div>
+        <div class="del-body">
+          <div class="del-areas">
+            <span class="area-tag">মোল্লাবাড়ি সড়ক</span>
+            <span class="area-tag">মেডিকেল</span>
+            <span class="area-tag">১নং সড়ক</span>
+            <span class="area-tag">২নং সড়ক</span>
+          </div>
         </div>
       </div>
-      <div class="info-row" style="border-bottom:none;">
-        <div class="info-icon">🏭</div>
-        <div>
-          <div class="info-label">উৎপাদন প্রযুক্তি</div>
-          <div class="info-value">RO (Reverse Osmosis) + UV Sterilization</div>
+
+      <!-- Saiful -->
+      <div class="card del-card reveal">
+        <div class="del-head">
+          <span class="del-num-badge">01334952212</span>
+          <div class="del-agent">
+            <span class="del-agent-name">সাইফুল</span>
+            <span class="del-agent-role">👤 ডেলিভারি এজেন্ট</span>
+          </div>
+        </div>
+        <div class="del-body">
+          <div class="del-areas">
+            <span class="area-tag">ঝিলটুলি</span>
+            <span class="area-tag">কমলাপুর</span>
+            <span class="area-tag">তেতুল তলা</span>
+            <span class="area-tag">নিলটুলি</span>
+            <span class="area-tag">ও অন্যান্য</span>
+          </div>
         </div>
       </div>
+
+      <!-- Alim & Shubho -->
+      <div class="card del-card reveal">
+        <div class="del-head">
+          <span class="del-num-badge">01334952213</span>
+          <div class="del-agent">
+            <span class="del-agent-name">আলিম ও শুভ</span>
+            <span class="del-agent-role">👥 ডেলিভারি এজেন্ট (২ জন)</span>
+          </div>
+        </div>
+        <div class="del-body">
+          <div class="del-areas">
+            <span class="area-tag">রঘুনন্দনপুর</span>
+            <span class="area-tag">শোভারাম্পুর</span>
+            <span class="area-tag">হাউজিং</span>
+            <span class="area-tag">নতুন বাস স্টান্ড</span>
+            <span class="area-tag">নিউ মার্কেট</span>
+            <span class="area-tag">হাজি শরিয়াতুল্লা বাজার</span>
+            <span class="area-tag">খাবাসপুর</span>
+            <span class="area-tag">ও অন্যান্য</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ahad & Rabbi -->
+      <div class="card del-card reveal">
+        <div class="del-head">
+          <span class="del-num-badge">01334952214</span>
+          <div class="del-agent">
+            <span class="del-agent-name">আহাদ ও রাব্বি</span>
+            <span class="del-agent-role">👥 ডেলিভারি এজেন্ট (২ জন)</span>
+          </div>
+        </div>
+        <div class="del-body">
+          <div class="del-areas">
+            <span class="area-tag">টেপাখোলা</span>
+            <span class="area-tag">রাজ্জাকের মোড়</span>
+            <span class="area-tag">অম্বিকাপুর</span>
+            <span class="area-tag">ভাষান চর</span>
+            <span class="area-tag">C&amp;B ঘাট</span>
+            <span class="area-tag">চুনাঘাটা</span>
+            <span class="area-tag">ও অন্যান্য</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Momin -->
+      <div class="card del-card reveal">
+        <div class="del-head">
+          <span class="del-num-badge">01334952215</span>
+          <div class="del-agent">
+            <span class="del-agent-name">মমিন</span>
+            <span class="del-agent-role">👤 ডেলিভারি এজেন্ট</span>
+          </div>
+        </div>
+        <div class="del-body">
+          <div class="del-areas">
+            <span class="area-tag">মিয়াপাড়া</span>
+            <span class="area-tag">হাউজিং</span>
+            <span class="area-tag">মোল্লাবাড়ি</span>
+            <span class="area-tag">মেডিকেল</span>
+            <span class="area-tag">বটতলা</span>
+            <span class="area-tag">ও অন্যান্য</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel/Restaurant -->
+      <div class="card del-card reveal">
+        <div class="del-head hotel">
+          <span class="del-num-badge">01334952216</span>
+          <div class="del-agent">
+            <span class="del-agent-name">হোটেল ও রেস্তোরাঁ</span>
+            <span class="del-agent-role">🍽️ বিশেষ কমার্শিয়াল সার্ভিস</span>
+          </div>
+        </div>
+        <div class="del-body">
+          <div class="del-areas">
+            <span class="area-tag">শহরের সকল হোটেল</span>
+            <span class="area-tag">রেস্তোরাঁ</span>
+            <span class="area-tag">ক্যাফে</span>
+            <span class="area-tag">কমার্শিয়াল</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kanaipur area -->
+      <div class="card del-card reveal">
+        <div class="del-head">
+          <span class="del-num-badge">01334952217</span>
+          <div class="del-agent">
+            <span class="del-agent-name">আউটস্কার্ট এরিয়া</span>
+            <span class="del-agent-role">🗺️ ডেলিভারি টিম</span>
+          </div>
+        </div>
+        <div class="del-body">
+          <div class="del-areas">
+            <span class="area-tag">কানাইপুর</span>
+            <span class="area-tag">চাঁদপুর</span>
+            <span class="area-tag">মল্লিকপুর</span>
+            <span class="area-tag">ও অন্যান্য</span>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="map-placeholder reveal">
-      <div class="map-pin">📍</div>
-      <div style="font-size:1.1rem; font-weight:600; color:#fff;">আমাদের অবস্থান</div>
-      <div>রঘুনন্দনপুর, স্যুইচগেট বাজার</div>
-      <div style="color: var(--primary-light);">ফরিদপুর, ঢাকা বিভাগ</div>
-      <a href="https://maps.google.com/?q=Faridpur,Bangladesh" target="_blank" class="btn-primary" style="margin-top:12px; font-size:0.88rem; padding:10px 24px;">
-        Google Maps এ দেখুন →
-      </a>
+
+    <!-- Quick call CTA under delivery -->
+    <div style="margin-top:36px;text-align:center;" class="reveal">
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:16px;">আপনার এলাকা খুঁজে না পেলে অফিসে কল করুন</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <a href="tel:01312996655" class="btn-p">📞 ০১৩১২-৯৯৬৬৫৫</a>
+        <a href="tel:01334952210" class="btn-p">📞 ০১৩৩৪-৯৫২২১০</a>
+        <a href="tel:01745862522" class="btn-o">📱 ০১৭৪৫-৮৬২৫২২</a>
+        <a href="tel:01312996699" class="btn-o">📱 ০১৩১২-৯৯৬৬৯৯</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT FORM -->
-<section id="contact" style="background: rgba(0,0,0,0.15); padding-top: 0; padding-bottom: 80px;">
-  <div class="section-header reveal" style="margin-bottom:36px;">
-    <div class="section-tag">অর্ডার করুন</div>
-    <h2 class="section-title">আজই <span class="gradient-text">অর্ডার দিন</span></h2>
-    <p class="section-desc">ফর্ম পূরণ করুন, আমরা আপনার সাথে যোগাযোগ করব।</p>
-  </div>
-  <div class="contact-wrapper">
-    <div class="glass-card reveal" style="padding: 40px;">
-      <div class="contact-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">আপনার নাম *</label>
-            <input type="text" class="form-input" placeholder="পূর্ণ নাম লিখুন">
-          </div>
-          <div class="form-group">
-            <label class="form-label">মোবাইল নম্বর *</label>
-            <input type="tel" class="form-input" placeholder="০১XXXXXXXXX">
-          </div>
+<!-- ░░ LOCATION ░░ -->
+<section class="sec" id="location">
+  <div class="si">
+    <div class="sec-hdr reveal">
+      <div class="sec-lbl">আমাদের অবস্থান</div>
+      <h2 class="sec-title">ফরিদপুরের <span class="hl-b">কেন্দ্রস্থলে</span></h2>
+      <p class="sec-desc">রঘুনন্দনপুর, স্যুইচগেট বাজার — এখান থেকেই আপনার দরজায় পৌঁছায় বিশুদ্ধ পানি।</p>
+    </div>
+    <div class="loc-grid">
+      <div class="card info-card reveal">
+        <div class="info-row"><div class="ibox">📍</div><div><div class="ilbl">কারখানার ঠিকানা</div><div class="ival">রঘুনন্দনপুর, স্যুইচগেট বাজার<br>ফরিদপুর, ঢাকা বিভাগ</div></div></div>
+        <div class="info-row"><div class="ibox">🏢</div><div><div class="ilbl">অফিস নম্বর</div><div class="ival"><a href="tel:01312996655">০১৩১২-৯৯৬৬৫৫</a> &nbsp; <a href="tel:01334952210">০১৩৩৪-৯৫২২১০</a><br><a href="tel:01745862522">০১৭৪৫-৮৬২৫২২</a> &nbsp; <a href="tel:01312996699">০১৩১২-৯৯৬৬৯৯</a></div></div></div>
+        <div class="info-row"><div class="ibox">🕐</div><div><div class="ilbl">সেবার সময়</div><div class="ival">সকাল ৭:০০ — রাত ১০:০০ (সপ্তাহে ৭ দিন)</div></div></div>
+        <div class="info-row"><div class="ibox">🏭</div><div><div class="ilbl">উৎপাদন প্রতিষ্ঠান</div><div class="ival">Royal Choice Food &amp; Beverage<br><span style="color:var(--muted);font-size:.8rem;font-weight:400;">Manufacturer · Faridpur, Bangladesh</span></div></div></div>
+        <div class="info-row"><div class="ibox">⚙️</div><div><div class="ilbl">প্রযুক্তি</div><div class="ival">RO (Reverse Osmosis) + UV Sterilization</div></div></div>
+      </div>
+      <div class="map-card reveal">
+        <div class="map-grid"></div>
+        <div class="map-pin"><span class="map-pin-ico">📍</span><div class="map-pulse"></div></div>
+        <div class="map-info">
+          <h3>স্যুইচগেট বাজার</h3>
+          <p>রঘুনন্দনপুর, ফরিদপুর</p>
+          <a href="https://maps.google.com/?q=Faridpur,Bangladesh" target="_blank" class="btn-o" style="font-size:.84rem;padding:10px 22px;">Google Maps এ দেখুন →</a>
         </div>
-        <div class="form-group">
-          <label class="form-label">ঠিকানা *</label>
-          <input type="text" class="form-input" placeholder="ডেলিভারি ঠিকানা লিখুন">
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">পণ্য নির্বাচন করুন</label>
-            <select class="form-input form-select">
-              <option value="">পণ্য বেছে নিন</option>
-              <option>১৯ লিটার জার</option>
-              <option>১ লিটার বোতল (কার্টন)</option>
-              <option>৫০০ মি.লি বোতল (কার্টন)</option>
-              <option>কাস্টম বাল্ক অর্ডার</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">পরিমাণ</label>
-            <input type="number" class="form-input" placeholder="কতটি প্রয়োজন?">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">বিশেষ বার্তা (ঐচ্ছিক)</label>
-          <textarea class="form-textarea" placeholder="আপনার বিশেষ চাহিদা বা বার্তা লিখুন..."></textarea>
-        </div>
-        <button class="btn-primary" onclick="submitOrder()" style="width:100%; padding:16px; font-size:1.05rem;">
-          🚚 অর্ডার পাঠান
-        </button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA BANNER -->
-<section>
-  <div class="cta-banner reveal">
-    <h2 class="cta-title">এখনই আমাদের ফোন করুন!</h2>
-    <p class="cta-desc">সকলের সুস্বাস্থ্যই আমাদের লক্ষ্য। হোম ডেলিভারি সহ সব জায়গায় বিশুদ্ধ পানি পৌঁছে দিই।</p>
-    <div>
-      <a href="tel:01312996655" class="phone-display">📞 ০১৩১২-৯৯৬৬৫৫</a>
-      <a href="tel:01745862522" class="phone-display">📱 ০১৭৪৫-৮৬২৫২২</a>
+<!-- ░░ ORDER FORM ░░ -->
+<section class="sec sec-alt" id="order">
+  <div class="si">
+    <div class="sec-hdr cx reveal">
+      <div class="sec-lbl">অর্ডার করুন</div>
+      <h2 class="sec-title">আজই <span class="hl-g">অর্ডার দিন</span></h2>
+      <p class="sec-desc">ফর্ম পূরণ করুন — আমরা দ্রুততম সময়ে আপনার সাথে যোগাযোগ করব।</p>
     </div>
-    <p style="color: rgba(255,255,255,0.5); margin-top:16px; font-size:0.85rem;">সকাল ৭টা থেকে রাত ১০টা পর্যন্ত সেবা পাওয়া যায়</p>
+    <div class="order-wrap">
+      <div class="card order-card reveal">
+        <div class="fg">
+          <div class="fr2">
+            <div class="fgrp"><label class="flbl">আপনার নাম *</label><input type="text" class="finp" placeholder="পূর্ণ নাম লিখুন"></div>
+            <div class="fgrp"><label class="flbl">মোবাইল নম্বর *</label><input type="tel" class="finp" placeholder="০১XXXXXXXXX"></div>
+          </div>
+          <div class="fgrp"><label class="flbl">ডেলিভারি ঠিকানা *</label><input type="text" class="finp" placeholder="পূর্ণ ঠিকানা লিখুন"></div>
+          <div class="fr2">
+            <div class="fgrp">
+              <label class="flbl">পণ্য নির্বাচন</label>
+              <select class="fsel">
+                <option value="">পণ্য বেছে নিন</option>
+                <option>১৯ লিটার জার</option>
+                <option>১ লিটার বোতল (কার্টন)</option>
+                <option>৫০০ মি.লি বোতল (কার্টন)</option>
+                <option>কাস্টম বাল্ক অর্ডার</option>
+              </select>
+            </div>
+            <div class="fgrp"><label class="flbl">পরিমাণ</label><input type="number" class="finp" placeholder="কতটি দরকার?"></div>
+          </div>
+          <div class="fgrp"><label class="flbl">বিশেষ বার্তা (ঐচ্ছিক)</label><textarea class="ftxt" placeholder="আপনার বিশেষ চাহিদা বা নির্দেশনা জানান..."></textarea></div>
+          <button class="fsubmit" onclick="submitOrder()">🚚 অর্ডার পাঠান</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ░░ CTA ░░ -->
+<section class="cta-sec">
+  <div class="cta-box reveal">
+    <div class="cta-bg">ফ্রেশ ফ্লো</div>
+    <h2 class="cta-title">এখনই ফোন করুন!</h2>
+    <p class="cta-desc">বিশুদ্ধ পানি সকলের অধিকার। ঘরে বসেই পান করুন ফরিদপুরের সেরা প্যাকেজড ওয়াটার।</p>
+    <div class="cta-phones">
+      <a href="tel:01312996655" class="ph-btn">📞 ০১৩১২-৯৯৬৬৫৫</a>
+      <a href="tel:01334952210" class="ph-btn">📞 ০১৩৩৪-৯৫২২১০</a>
+      <a href="tel:01745862522" class="ph-btn">📱 ০১৭৪৫-৮৬২৫২২</a>
+      <a href="tel:01312996699" class="ph-btn">📱 ০১৩১২-৯৯৬৬৯৯</a>
+    </div>
+    <p class="cta-hours">সকাল ৭:০০ থেকে রাত ১০:০০ পর্যন্ত · সপ্তাহে ৭ দিন</p>
+  </div>
+</section>
+
+<!-- ░░ FOOTER ░░ -->
 <footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <h3>💧 ফ্রেশ ফ্লো</h3>
-      <p>ফরিদপুরের বিশ্বস্ত প্যাকেজড ড্রিংকিং ওয়াটার সরবরাহকারী। আমরা বিশ্বাস করি যে বিশুদ্ধ পানি একটি মৌলিক অধিকার। তাই সাশ্রয়ী মূল্যে সর্বোচ্চ মানের পানি সরবরাহ করি।</p>
-      <div class="social-links">
-        <div class="social-btn" title="Facebook">📘</div>
-        <div class="social-btn" title="WhatsApp">💬</div>
-        <div class="social-btn" title="Phone">📞</div>
+  <div class="ft-grid">
+    <div>
+      <img src="logo.svg" alt="Fresh Flow" class="ft-logo">
+      <p class="ft-tag">বিশুদ্ধতার প্রতিশ্রুতি।</p>
+      <p class="ft-desc">Royal Choice Food &amp; Beverage-এর পণ্য ফ্রেশ ফ্লো প্যাকেজড ড্রিংকিং ওয়াটার — ফরিদপুরের পরিবার, অফিস ও প্রতিষ্ঠানে বিশুদ্ধ পানীয় জল সরবরাহে বিশ্বস্ত নাম।</p>
+      <div class="ft-socials">
+        <a class="soc" href="#" title="Facebook">📘</a>
+        <a class="soc" href="#" title="WhatsApp">💬</a>
+        <a class="soc" href="tel:01334952210" title="Call">📞</a>
       </div>
     </div>
-    <div class="footer-col">
-      <h4>দ্রুত লিঙ্ক</h4>
+    <div class="ft-col">
+      <h4>কোম্পানি</h4>
       <ul>
-        <li onclick="scrollTo('#home')">🏠 হোম</li>
-        <li onclick="scrollTo('#features')">✨ বৈশিষ্ট্য</li>
-        <li onclick="scrollTo('#products')">🛍️ পণ্যসমূহ</li>
-        <li onclick="scrollTo('#process')">⚙️ প্রক্রিয়া</li>
-        <li onclick="scrollTo('#contact')">📞 যোগাযোগ</li>
+        <li onclick="scrollTo('#home')">হোম</li>
+        <li onclick="scrollTo('#features')">আমাদের সুবিধা</li>
+        <li onclick="scrollTo('#products')">পণ্যসমূহ</li>
+        <li onclick="scrollTo('#delivery')">ডেলিভারি কভারেজ</li>
+        <li onclick="scrollTo('#location')">আমাদের অবস্থান</li>
       </ul>
     </div>
-    <div class="footer-col">
+    <div class="ft-col">
       <h4>যোগাযোগ</h4>
       <ul>
         <li>📍 রঘুনন্দনপুর, ফরিদপুর</li>
-        <li>📱 ০১৩১২-৯৯৬৬৫৫</li>
+        <li>🏢 ০১৩১২-৯৯৬৬৫৫</li>
+        <li>🏢 ০১৩৩৪-৯৫২২১০</li>
         <li>📱 ০১৭৪৫-৮৬২৫২২</li>
         <li>📱 ০১৩১২-৯৯৬৬৯৯</li>
         <li>🕐 ৭ AM – ১০ PM</li>
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
-    <p>© ২০২৪ <span>ফ্রেশ ফ্লো প্যাকেজড ড্রিংকিং ওয়াটার</span>। সকল অধিকার সংরক্ষিত।<br>
-    রঘুনন্দনপুর, স্যুইচগেট বাজার, ফরিদপুর, বাংলাদেশ।</p>
+  <div class="ft-bottom">
+    <p>© ২০২৫ <span>ফ্রেশ ফ্লো প্যাকেজড ড্রিংকিং ওয়াটার</span>। সকল অধিকার সংরক্ষিত।</p>
+    <p>একটি পণ্য: <span>Royal Choice Food &amp; Beverage</span> · ফরিদপুর</p>
   </div>
 </footer>
 
-<!-- Scroll to top button -->
 <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-<!-- Toast notification -->
-<div class="toast" id="toast">✅ অর্ডার পাঠানো হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।</div>
+<div class="toast" id="toast">✅ অর্ডার পাঠানো হয়েছে! শীঘ্রই যোগাযোগ করব।</div>
 
 <script>
-  // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      }
-    });
-  }, { threshold: 0.1 });
-  revealEls.forEach(el => observer.observe(el));
-
-  // Scroll to top button
-  window.addEventListener('scroll', () => {
-    const btn = document.getElementById('scrollTopBtn');
-    if (window.scrollY > 400) btn.classList.add('show');
-    else btn.classList.remove('show');
-  });
-
-  // Smooth scroll for nav
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  function scrollTo(id) {
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  // Mobile menu toggle
-  function toggleMenu() {
-    const links = document.querySelector('.nav-links');
-    if (links.style.display === 'flex') {
-      links.style.display = 'none';
-    } else {
-      links.style.display = 'flex';
-      links.style.flexDirection = 'column';
-      links.style.position = 'absolute';
-      links.style.top = '70px';
-      links.style.left = '0';
-      links.style.width = '100%';
-      links.style.background = 'rgba(0,0,0,0.9)';
-      links.style.padding = '20px';
-      links.style.gap = '16px';
-      links.style.backdropFilter = 'blur(20px)';
+// Reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 55);
+      obs.unobserve(e.target);
     }
-  }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  // Order submission
-  function submitOrder() {
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
-  }
+// Scroll to top + navbar opacity
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTopBtn');
+  btn.classList.toggle('show', window.scrollY > 400);
+  document.getElementById('nav').style.background =
+    window.scrollY > 60 ? 'rgba(9,15,30,.96)' : 'rgba(9,15,30,.7)';
+});
 
-  // Animated counter
-  function animateCounter(el, target) {
-    let count = 0;
-    const step = Math.ceil(target / 60);
-    const timer = setInterval(() => {
-      count += step;
-      if (count >= target) { el.textContent = target + (el.dataset.suffix || ''); clearInterval(timer); }
-      else el.textContent = count + (el.dataset.suffix || '');
-    }, 20);
+// Mobile menu
+function toggleMenu() {
+  const l = document.getElementById('navLinks');
+  if (l.style.display === 'flex') {
+    l.style.display = '';
+  } else {
+    Object.assign(l.style, {
+      display:'flex',flexDirection:'column',position:'absolute',
+      top:'73px',left:'0',right:'0',
+      background:'rgba(9,15,30,.97)',
+      borderBottom:'1px solid rgba(255,255,255,.07)',
+      padding:'20px 24px',gap:'16px',
+      backdropFilter:'blur(22px)',zIndex:'999'
+    });
   }
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+function scrollTo(id) { document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' }); }
+
+// Order submit
+function submitOrder() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4500);
+}
 </script>
 </body>
 </html>
